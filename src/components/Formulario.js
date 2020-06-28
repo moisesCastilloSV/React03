@@ -3,7 +3,7 @@ import Error from './Error';
 import shortid from 'shortid';
 //import { v4  as uuidv4 } from 'uuid'; //uuidv4();
 
-const Formulario = () => {
+const Formulario = ({guardarGasto,guardacrearGasto}) => {
 const [nombreGasto,guardarnombreGasto]=useState('');
 const [cantidadGasto,guardarcantidadGasto]=useState(0);
 const [error,guardarError]=useState(false);
@@ -11,7 +11,7 @@ const [error,guardarError]=useState(false);
 const agregarGasto = e =>{
     e.preventDefault();
     //validamos
-     if (cantidadGasto< 0 || isNaN(cantidadGasto) ||  nombreGasto.trim()===''){
+     if (cantidadGasto< 1 || isNaN(cantidadGasto) ||  nombreGasto.trim()===''){
         guardarError(true);
         return;
      }
@@ -23,10 +23,14 @@ const agregarGasto = e =>{
       id:shortid.generate()
 
     }
- console.log(gasto);
+
     // pasamos   al  componente principal
+    guardarGasto(gasto);
+    guardacrearGasto(true);
 
     // limpiar el form
+    guardarnombreGasto('');
+    guardarcantidadGasto(0);
 }
 
 
